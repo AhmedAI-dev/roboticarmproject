@@ -1,0 +1,473 @@
+<?xml version="1.0" ?>
+<!--URDF organized perfectly into sequential subsystems-->
+<robot name="arm_robot">
+
+  <!-- ========================================== -->
+  <!-- 1. ROOT & BASE STRUCTURE                 -->
+  <!-- ========================================== -->
+  <link name="root" />
+  <joint name="fixed_node_to_root_joint_0" type="fixed">
+          <origin xyz="-0.0386083 0.124405 -0.0639913" rpy="5.80768e-15 4.80471e-17 9.38306e-31" />
+          <axis xyz="0 0 1" />
+          <parent link="root" />
+          <child link="base" />
+      </joint>
+  <link name="base">
+          <inertial>
+              <mass value="0.101031" />
+              <origin xyz="0.0406816 -0.0928149 0.0584112" rpy="0 -0 0" />
+              <inertia ixx="0.000137746" ixy="4.68146e-06" ixz="-3.43353e-06" iyy="0.000141721" iyz="2.2726e-06" izz="0.000218799" />
+          </inertial>
+          <visual>
+              <origin xyz="0 0 0" rpy="0 -0 0" />
+              <geometry>
+                  <mesh filename="package://robotic_arm_description/meshes/Base.stl" scale="1 1 1" />
+              </geometry>
+              <material name="0.937255_0.941176_0.945098_0.000000_0.000000">
+                  <texture />
+                  <color rgba="0.85 0.85 0.88 1" />
+              </material>
+          </visual>
+      </link>
+
+  <!-- ========================================== -->
+  <!-- 2. WAIST MECHANISM                       -->
+  <!-- ========================================== -->
+  <joint name="fastened_1_4" type="fixed">
+          <origin xyz="0.032073 -0.081121 0.0741076" rpy="-5.67254e-17 -2.1343e-15 3.60822e-16" />
+          <axis xyz="1.94764e-15 2.81325e-15 1" />
+          <parent link="base" />
+          <child link="servo_motor_mg996r" />
+      </joint>
+  <link name="servo_motor_mg996r">
+          <inertial>
+              <mass value="0.0356215" />
+              <origin xyz="0.0168551 -0.0171522 -0.00843485" rpy="0 -0 0" />
+              <inertia ixx="7.34339e-06" ixy="1.80523e-06" ixz="2.44862e-07" iyy="8.87594e-06" iyz="-1.62071e-07" izz="6.32908e-06" />
+          </inertial>
+          <visual>
+              <origin xyz="-0.032073 0.081121 -0.0741076" rpy="0 -0 0" />
+              <geometry>
+                  <mesh filename="package://robotic_arm_description/meshes/Servo Motor MG996R.stl" scale="1 1 1" />
+              </geometry>
+              <material name="0.352941_0.352941_0.352941_0.000000_0.000000">
+                  <texture />
+                  <color rgba="0.75 0.75 0.80 1" />
+              </material>
+          </visual>
+      </link>
+  <joint name="waist_joint" type="revolute">
+          <origin xyz="0.00870625 -0.0117586 0.0186" rpy="-2.445e-15 3.21117e-15 1.23743" />
+          <axis xyz="1.38613e-16 3.26282e-15 1" />
+          <limit lower="-1.5708" upper="1.5708" effort="10.0" velocity="3.14" />
+          <parent link="servo_motor_mg996r" />
+          <child link="waist" />
+      </joint>
+  <link name="waist">
+          <inertial>
+              <mass value="0.0715763" />
+              <origin xyz="0.00027228 0.0065737 0.0172896" rpy="0 -0 0" />
+              <inertia ixx="4.79742e-05" ixy="-2.92128e-06" ixz="-5.56079e-06" iyy="6.05465e-05" iyz="-6.47243e-06" izz="5.75198e-05" />
+          </inertial>
+          <visual>
+              <origin xyz="-0.0407793 0.0928796 -0.0931076" rpy="0 -0 0" />
+              <geometry>
+                  <mesh filename="package://robotic_arm_description/meshes/Waist.stl" scale="1 1 1" />
+              </geometry>
+              <material name="0.082353_0.376471_0.745098_0.000000_0.000000">
+                  <texture />
+                  <color rgba="0.12 0.13 0.15 1" />
+              </material>
+          </visual>
+      </link>
+
+  <!-- ========================================== -->
+  <!-- 3. SHOULDER & UPPER ARM                  -->
+  <!-- ========================================== -->
+  <joint name="fastened_1_3" type="fixed">
+          <origin xyz="0.0167974 0.0211208 0.0535347" rpy="3.13405e-16 8.72205e-17 -2.22045e-16" />
+          <axis xyz="-0.167932 0.985799 2.8727e-15" />
+          <parent link="waist" />
+          <child link="servo_motor_mg996r_1" />
+      </joint>
+  <link name="servo_motor_mg996r_1">
+          <inertial>
+              <mass value="0.0356215" />
+              <origin xyz="-0.0147306 0.00848155 -0.0201682" rpy="0 -0 0" />
+              <inertia ixx="7.99071e-06" ixy="4.90695e-07" ixz="-1.96815e-06" iyy="6.44804e-06" iyz="-1.24651e-07" izz="8.10967e-06" />
+          </inertial>
+          <visual>
+              <origin xyz="-0.0574024 0.0717885 -0.146819" rpy="0 -0 0" />
+              <geometry>
+                  <mesh filename="package://robotic_arm_description/meshes/Servo Motor MG996R_1.stl" scale="1 1 1" />
+              </geometry>
+              <material name="0.352941_0.352941_0.352941_0.000000_0.000000">
+                  <texture />
+                  <color rgba="0.75 0.75 0.80 1" />
+              </material>
+          </visual>
+      </link>
+  <joint name="shoulder_joint" type="revolute">
+          <origin xyz="-0.00337881 -0.017009 -0.0132583" rpy="-0.00880207 0.0516235 -0.000227249" />
+          <axis xyz="0.167932 -0.985799 -3.41609e-15" />
+          <limit lower="-1.0472" upper="1.0472" effort="10.0" velocity="3.14" />
+          <parent link="servo_motor_mg996r_1" />
+          <child link="arm_01" />
+      </joint>
+  <link name="arm_01">
+          <inertial>
+              <mass value="0.0672108" />
+              <origin xyz="-0.0101921 -0.00963787 0.0580444" rpy="0 -0 0" />
+              <inertia ixx="0.00010883" ixy="-1.45286e-06" ixz="1.96592e-05" iyy="0.00011741" iyz="3.099e-06" izz="1.35739e-05" />
+          </inertial>
+          <visual>
+              <origin xyz="-0.0540236 0.0887974 -0.133561" rpy="0 -0 0" />
+              <geometry>
+                  <mesh filename="package://robotic_arm_description/meshes/Arm 01.stl" scale="1 1 1" />
+              </geometry>
+              <material name="0.082353_0.376471_0.745098_0.000000_0.000000">
+                  <texture />
+                  <color rgba="0.12 0.13 0.15 1" />
+              </material>
+          </visual>
+      </link>
+  <joint name="fastened_1_0" type="fixed">
+          <origin xyz="0.00108524 -0.00637058 -2.91434e-16" rpy="-8.67362e-19 -6.93889e-18 2.87856e-17" />
+          <axis xyz="-0.167932 0.985799 3.41609e-15" />
+          <parent link="arm_01" />
+          <child link="arm_01_1" />
+      </joint>
+  <link name="arm_01_1">
+          <inertial>
+              <mass value="0.000649482" />
+              <origin xyz="-0.0124353 -0.00165935 -0.0229608" rpy="0 -0 0" />
+              <inertia ixx="1.18358e-08" ixy="3.56348e-10" ixz="-1.62432e-09" iyy="8.0687e-09" iyz="-8.10603e-10" izz="9.6144e-09" />
+          </inertial>
+          <visual>
+              <origin xyz="-0.0549472 0.0942193 -0.133561" rpy="0 -0 0" />
+              <geometry>
+                  <mesh filename="package://robotic_arm_description/meshes/Arm 01_1.stl" scale="1 1 1" />
+              </geometry>
+              <material name="0.082353_0.376471_0.745098_0.000000_0.000000">
+                  <texture />
+                  <color rgba="0.12 0.13 0.15 1" />
+              </material>
+          </visual>
+      </link>
+
+  <!-- ========================================== -->
+  <!-- 4. ELBOW & FOREARM                       -->
+  <!-- ========================================== -->
+  <joint name="elbow_joint" type="revolute">
+          <origin xyz="-0.0233091 -0.00397075 0.117647" rpy="0.228615 -0.926223 -0.114529" />
+          <axis xyz="0.167932 -0.985799 -3.02015e-15" />
+          <limit lower="-1.2217" upper="1.2217" effort="10.0" velocity="3.14" />
+          <parent link="arm_01" />
+          <child link="servo_motor_mg996r_2" />
+      </joint>
+  <link name="servo_motor_mg996r_2">
+          <inertial>
+              <mass value="0.0356215" />
+              <origin xyz="0.0050744 0.0282888 -0.000612193" rpy="0 -0 0" />
+              <inertia ixx="6.26562e-06" ixy="-3.03874e-07" ixz="2.38663e-07" iyy="6.22739e-06" iyz="5.93172e-08" izz="1.00554e-05" />
+          </inertial>
+          <visual>
+              <origin xyz="-0.0307144 0.0927682 -0.251208" rpy="0 -0 0" />
+              <geometry>
+                  <mesh filename="package://robotic_arm_description/meshes/Servo Motor MG996R_2.stl" scale="1 1 1" />
+              </geometry>
+              <material name="0.352941_0.352941_0.352941_0.000000_0.000000">
+                  <texture />
+                  <color rgba="0.75 0.75 0.80 1" />
+              </material>
+          </visual>
+      </link>
+  <joint name="fastened_1_2" type="fixed">
+          <origin xyz="0.0312856 0.0217629 0.00284453" rpy="-2.85882e-15 4.996e-16 1.36696e-15" />
+          <axis xyz="-0.167932 0.985799 2.65368e-15" />
+          <parent link="servo_motor_mg996r_2" />
+          <child link="arm_02_v3" />
+      </joint>
+  <link name="arm_02_v3">
+          <inertial>
+              <mass value="0.0528829" />
+              <origin xyz="0.00558634 -0.00472001 -0.00527772" rpy="0 -0 0" />
+              <inertia ixx="1.14925e-05" ixy="-8.76515e-06" ixz="2.86344e-06" iyy="5.96286e-05" iyz="5.06883e-07" izz="5.72625e-05" />
+          </inertial>
+          <visual>
+              <origin xyz="-0.0620154 0.0710026 -0.254302" rpy="0 -0 0" />
+              <geometry>
+                  <mesh filename="package://robotic_arm_description/meshes/Arm 02 v3.stl" scale="1 1 1" />
+              </geometry>
+              <material name="0.082353_0.376471_0.745098_0.000000_0.000000">
+                  <texture />
+                  <color rgba="0.12 0.13 0.15 1" />
+              </material>
+          </visual>
+      </link>
+
+  <!-- ========================================== -->
+  <!-- 5. WRIST MECHANISMS (ROLL & PITCH)       -->
+  <!-- ========================================== -->
+  <joint name="fastened_2_0" type="fixed">
+          <origin xyz="0.0445283 0.00200623 -0.0216135" rpy="-1.62386 -1.50802 0.221897" />
+          <axis xyz="0 1 0" />
+          <parent link="arm_02_v3" />
+          <child link="servo_motor" />
+      </joint>
+  <link name="servo_motor">
+          <inertial>
+              <mass value="0.00749909" />
+              <origin xyz="0.0133719 -0.00553916 -9.90986e-20" rpy="0 -0 0" />
+              <inertia ixx="4.81958e-07" ixy="3.76599e-08" ixz="0" iyy="4.49862e-07" iyz="0" izz="7.44587e-07" />
+          </inertial>
+          <visual>
+              <origin xyz="0.0138 -0.01805 0" rpy="0 -0 0" />
+              <geometry>
+                  <mesh filename="package://robotic_arm_description/meshes/Servo Motor.stl" scale="1 1 1" />
+              </geometry>
+              <material name="0.301961_0.301961_0.301961_0.000000_0.000000">
+                  <texture />
+                  <color rgba="0.05 0.05 0.05 1" />
+              </material>
+          </visual>
+      </link>
+  <joint name="wrist_roll_joint" type="revolute">
+          <origin xyz="0.0087 0.01185 6.76542e-17" rpy="0.240602 -0.0212445 1.39215" />
+          <axis xyz="0.983862 0.167602 -0.0626468" />
+          <limit lower="-1.5708" upper="1.5708" effort="3.0" velocity="5.0" />
+          <parent link="servo_motor" />
+          <child link="arm_03" />
+      </joint>
+  <link name="arm_03">
+          <inertial>
+              <mass value="0.0173574" />
+              <origin xyz="0.0188285 -0.00304012 0.00277914" rpy="0 -0 0" />
+              <inertia ixx="2.63992e-06" ixy="1.61309e-07" ixz="1.84822e-07" iyy="5.36981e-06" iyz="2.193e-07" izz="4.13772e-06" />
+          </inertial>
+          <visual>
+              <origin xyz="-0.118727 0.0669209 -0.24043" rpy="0 -0 0" />
+              <geometry>
+                  <mesh filename="package://robotic_arm_description/meshes/Arm 03.stl" scale="1 1 1" />
+              </geometry>
+              <material name="0.082353_0.376471_0.745098_0.000000_0.000000">
+                  <texture />
+                  <color rgba="0.12 0.13 0.15 1" />
+              </material>
+          </visual>
+      </link>
+  <joint name="fastened_1_1" type="fixed">
+          <origin xyz="0.0100537 -0.00277107 0.00362407" rpy="-0.199177 -0.0636488 -2.97267" />
+          <axis xyz="0 1 0" />
+          <parent link="arm_03" />
+          <child link="servo_motor_2" />
+      </joint>
+  <link name="servo_motor_2">
+          <inertial>
+              <mass value="0.00749909" />
+              <origin xyz="-0.0142281 -0.00553916 -9.90986e-20" rpy="0 -0 0" />
+              <inertia ixx="4.81958e-07" ixy="3.76599e-08" ixz="0" iyy="4.49862e-07" iyz="0" izz="7.44587e-07" />
+          </inertial>
+          <visual>
+              <origin xyz="-0.0138 -0.01805 0" rpy="0 -0 0" />
+              <geometry>
+                  <mesh filename="package://robotic_arm_description/meshes/Servo Motor.stl" scale="1 1 1" />
+              </geometry>
+              <material name="0.301961_0.301961_0.301961_0.000000_0.000000">
+                  <texture />
+                  <color rgba="0.05 0.05 0.05 1" />
+              </material>
+          </visual>
+      </link>
+  <joint name="wrist_pitch_joint" type="revolute">
+          <origin xyz="-0.0189 0.01185 2.08167e-17" rpy="3.03987 1.68615e-15 -1.5708" />
+          <axis xyz="-1 1.23909e-16 0" />
+          <limit lower="-1.5708" upper="1.5708" effort="3.0" velocity="5.0" />
+          <parent link="servo_motor_2" />
+          <child link="gripper_base" />
+      </joint>
+  <link name="gripper_base">
+          <inertial>
+              <mass value="0.0230141" />
+              <origin xyz="0.0017005 0.00597594 0.0263357" rpy="0 -0 0" />
+              <inertia ixx="1.10919e-05" ixy="-4.47723e-07" ixz="-1.84715e-06" iyy="1.24503e-05" iyz="-1.85622e-06" izz="3.57441e-06" />
+          </inertial>
+          <visual>
+              <origin xyz="-0.014 0.009 0.063" rpy="0 -0 0" />
+              <geometry>
+                  <mesh filename="package://robotic_arm_description/meshes/Gripper Base.stl" scale="1 1 1" />
+              </geometry>
+              <material name="0.305882_0.596078_0.105882_0.000000_0.000000">
+                  <texture />
+                  <color rgba="1.00 0.35 0.00 1" />
+              </material>
+          </visual>
+      </link>
+
+  <!-- ========================================== -->
+  <!-- 6. GRIPPER ASSEMBLY                      -->
+  <!-- ========================================== -->
+  <joint name="fastened_6_0" type="fixed">
+          <origin xyz="0.0267 0.0035 0.038" rpy="-3.14159 -5.16254e-15 -3.14159" />
+          <axis xyz="0 1 0" />
+          <parent link="gripper_base" />
+          <child link="servo_motor_1" />
+      </joint>
+  <link name="servo_motor_1">
+          <inertial>
+              <mass value="0.00749909" />
+              <origin xyz="0.0133204 -0.00553916 1.32483e-19" rpy="0 -0 0" />
+              <inertia ixx="4.81958e-07" ixy="3.76599e-08" ixz="0" iyy="4.49862e-07" iyz="0" izz="7.44587e-07" />
+          </inertial>
+          <visual>
+              <origin xyz="0.0137485 -0.01805 2.31581e-19" rpy="0 -0 0" />
+              <geometry>
+                  <mesh filename="package://robotic_arm_description/meshes/Servo Motor.stl" scale="1 1 1" />
+              </geometry>
+              <material name="0.301961_0.301961_0.301961_0.000000_0.000000">
+                  <texture />
+                  <color rgba="0.05 0.05 0.05 1" />
+              </material>
+          </visual>
+      </link>
+  <joint name="gripper_joint" type="revolute">
+          <origin xyz="-0.001 0.014 0.058" rpy="-3.14159 -1.32304 3.14159" />
+          <axis xyz="0 -1 0" />
+          <limit lower="-0.5" upper="0.5" effort="3.0" velocity="5.0" />
+          <parent link="gripper_base" />
+          <child link="grip_link" />
+      </joint>
+  <link name="grip_link">
+          <inertial>
+              <mass value="0.00103919" />
+              <origin xyz="0.0155 0.002 -2.19769e-19" rpy="0 -0 0" />
+              <inertia ixx="4.72589e-09" ixy="0" ixz="0" iyy="1.35856e-07" iyz="0" izz="1.33901e-07" />
+          </inertial>
+          <visual>
+              <origin xyz="0 0 0" rpy="0 -0 0" />
+              <geometry>
+                  <mesh filename="package://robotic_arm_description/meshes/Grip Link.stl" scale="1 1 1" />
+              </geometry>
+              <material name="0.305882_0.596078_0.105882_0.000000_0.000000">
+                  <texture />
+                  <color rgba="1.00 0.35 0.00 1" />
+              </material>
+          </visual>
+      </link>
+  <joint name="gripper_right_joint" type="continuous">
+          <origin xyz="0.009 0.014 0.058" rpy="-5.14983e-15 -1.17524 3.91123e-15" />
+          <axis xyz="0 -1 0" />
+          <parent link="gripper_base" />
+          <child link="grip_link_1" />
+      </joint>
+  <link name="grip_link_1">
+          <inertial>
+              <mass value="0.00103919" />
+              <origin xyz="0.0155 0.002 -2.19769e-19" rpy="0 -0 0" />
+              <inertia ixx="4.72589e-09" ixy="0" ixz="0" iyy="1.35856e-07" iyz="0" izz="1.33901e-07" />
+          </inertial>
+          <visual>
+              <origin xyz="0 0 0" rpy="0 -0 0" />
+              <geometry>
+                  <mesh filename="package://robotic_arm_description/meshes/Grip Link.stl" scale="1 1 1" />
+              </geometry>
+              <material name="0.305882_0.596078_0.105882_0.000000_0.000000">
+                  <texture />
+                  <color rgba="1.00 0.35 0.00 1" />
+              </material>
+          </visual>
+      </link>
+  <joint name="revolute_7_0" type="continuous">
+          <origin xyz="0.031 0 -1.52656e-16" rpy="-2.37403 -2.22045e-15 1.5708" />
+          <axis xyz="-1 0 0" />
+          <parent link="grip_link_1" />
+          <child link="gripper" />
+      </joint>
+  <link name="gripper">
+          <inertial>
+              <mass value="0.00702205" />
+              <origin xyz="-0.00425 0.0045143 -0.00488967" rpy="0 -0 0" />
+              <inertia ixx="2.23002e-06" ixy="0" ixz="0" iyy="2.07616e-06" iyz="4.85829e-07" izz="2.3841e-07" />
+          </inertial>
+          <visual>
+              <origin xyz="-0.0085 -0.005 0.027" rpy="0 -0 0" />
+              <geometry>
+                  <mesh filename="package://robotic_arm_description/meshes/Gripper.stl" scale="1 1 1" />
+              </geometry>
+              <material name="0.305882_0.596078_0.105882_0.000000_0.000000">
+                  <texture />
+                  <color rgba="1.00 0.35 0.00 1" />
+              </material>
+          </visual>
+      </link>
+  <joint name="revolute_8_0" type="continuous">
+          <origin xyz="0.031 -1.66533e-16 -1.52656e-16" rpy="0.933414 -2.60902e-15 -1.5708" />
+          <axis xyz="1 0 0" />
+          <parent link="grip_link" />
+          <child link="gripper_1" />
+      </joint>
+  <link name="gripper_1">
+          <inertial>
+              <mass value="0.00702205" />
+              <origin xyz="0.00425 0.0045143 -0.00488967" rpy="0 -0 0" />
+              <inertia ixx="2.23002e-06" ixy="0" ixz="0" iyy="2.07616e-06" iyz="4.85829e-07" izz="2.3841e-07" />
+          </inertial>
+          <visual>
+              <origin xyz="0 -0.005 0.027" rpy="0 -0 0" />
+              <geometry>
+                  <mesh filename="package://robotic_arm_description/meshes/Gripper.stl" scale="1 1 1" />
+              </geometry>
+              <material name="0.305882_0.596078_0.105882_0.000000_0.000000">
+                  <texture />
+                  <color rgba="1.00 0.35 0.00 1" />
+              </material>
+          </visual>
+      </link>
+  <joint name="gear_left_joint" type="continuous">
+          <origin xyz="-0.009 0.014 0.038" rpy="-3.14159 -1.309 3.14159" />
+          <axis xyz="0 -1 0" />
+          <parent link="gripper_base" />
+          <child link="gear_1" />
+      </joint>
+  <link name="gear_1">
+          <inertial>
+              <mass value="0.00343674" />
+              <origin xyz="0.00557875 0.002 -0.000601969" rpy="0 -0 0" />
+              <inertia ixx="1.1715e-07" ixy="0" ixz="-1.20439e-08" iyy="5.81859e-07" iyz="0" izz="4.73873e-07" />
+          </inertial>
+          <visual>
+              <origin xyz="0.0101063 0 6.07153e-18" rpy="0 -0 0" />
+              <geometry>
+                  <mesh filename="package://robotic_arm_description/meshes/Gear 1.stl" scale="1 1 1" />
+              </geometry>
+              <material name="0.305882_0.596078_0.105882_0.000000_0.000000">
+                  <texture />
+                  <color rgba="1.00 0.35 0.00 1" />
+              </material>
+          </visual>
+      </link>
+  <joint name="gear_right_joint" type="continuous">
+          <origin xyz="0.0179 0.014 0.038" rpy="-3.14159 1.309 3.14159" />
+          <axis xyz="0 -1 0" />
+          <parent link="gripper_base" />
+          <child link="gear_2" />
+      </joint>
+  <link name="gear_2">
+          <inertial>
+              <mass value="0.00333818" />
+              <origin xyz="-0.00569595 0.002 0.00014" rpy="0 -0 0" />
+              <inertia ixx="1.2603e-07" ixy="0" ixz="5.81186e-08" iyy="5.80457e-07" iyz="0" izz="4.6333e-07" />
+          </inertial>
+          <visual>
+              <origin xyz="0.0101063 0 6.07153e-18" rpy="0 -0 0" />
+              <geometry>
+                  <mesh filename="package://robotic_arm_description/meshes/Gear 2.stl" scale="1 1 1" />
+              </geometry>
+              <material name="0.305882_0.596078_0.105882_0.000000_0.000000">
+                  <texture />
+                  <color rgba="1.00 0.35 0.00 1" />
+              </material>
+          </visual>
+      </link>
+
+</robot>
