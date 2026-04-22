@@ -1,0 +1,31 @@
+# ROS 2 Build files
+ros2_workspace/build/
+ros2_workspace/install/
+ros2_workspace/log/
+
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+.env
+
+# User-specific
+.vscode/
+.idea/
+*.swp
+*.bak
+*~
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# ROS 2 local config
+install/
+build/
+log/
+.catkin_workspace
+.ament_package

@@ -1,0 +1,5 @@
+pyserial>=3.5
+opencv-python>=4.8.0
+numpy<2.0.0
+# These are the core Python dependencies that are best managed via pip
+# Note: ROS 2 system libraries (rclpy, cv_bridge) are handled via apt.
